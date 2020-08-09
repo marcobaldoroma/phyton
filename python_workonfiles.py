@@ -137,3 +137,37 @@ for i in array:
         largest= i                      ## the algoritm to gave a new largest value when it is fond at  y list
         
 print(largest)
+
+
+
+
+# open file and select variables in my file list
+
+f = open('d:/software/specie_invasive.txt')
+
+for line in f:
+    addr = line.split(',')
+    print(line)
+    if addr[3] == 'NY':
+        print('this is a NY addres ' + line)
+    elif addr[3] == 'NJ':
+        print('this is a NJ address' + line)
+    else:
+        print(line + ' this address isnt in NY or NJ')
+
+
+
+        ## to remove white space on py
+	
+f = open('d:/software/specie_invasive.txt')
+
+for line in f:
+    addr = line.split(',')
+    if addr[3].strip() == 'NY':
+        print('this is a NY addres ' + line)
+    elif addr[3].strip() == 'NJ':
+        print('this is a NJ address' + line)
+    else:
+        print(line + ' this address isnt in NY or NJ')
+	
+	
