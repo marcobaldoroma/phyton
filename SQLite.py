@@ -44,3 +44,34 @@ answer = conn.execute('SELECT AVG(asmt) AS sumasmt, propclass FROM parcels GROUP
 for row in answer:
     print (row)
     print ("Property Class", row[1], " $", row[0])
+    
+############################################################
+###################   SECOND PART    #######################
+
+## to import mod_spatialite
+
+import os
+os.chdir("C:/OSGeo4W64/bin")
+
+import sqlite3
+#pkey = input ('enter your parcel key: ')
+conn = sqlite3.Connection('C:/training/python/tompkins.sqlite')
+conn.enable_load_extension(True)
+conn.execute('SELECT load_extension("C:/OSGeo4W64/bin/mod_spatialite")')
+
+answer = conn.execute('''SELECT sum(asmt) AS sumasmt, propclass
+                      FROM parcels, floodzones
+                      WHERE ST_Intersects(parcels.geometry, floodzones.geom)
+                      AND floodzones.zone = 'A'
+                      GROUP BY propclass ORDER BY sumasmt''')
+for row in answer:
+    print ("property Class", row[1], "$", row[0])
+
+
+
+
+
+
+
+
+
